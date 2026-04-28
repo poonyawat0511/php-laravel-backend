@@ -26,14 +26,10 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User registered successfully',
-            'data' => [
-                'user' => $user,
-                'token' => $token
-            ]
-        ], 201);
+        return $this->sendResponse([
+            'user' => $user,
+            'token' => $token
+        ], 'User registered successfully', 201);
     }
 
     public function login(Request $request){
@@ -45,21 +41,14 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'
-            ], 401);
+            return $this->sendError('อีเมลหรือรหัสผ่านไม่ถูกต้อง', null, 401);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Login successful',
-            'data' => [
-                'user' => $user,
-                'token' => $token
-            ]
-        ], 200);
+        return $this->sendResponse([
+            'user' => $user,
+            'token' => $token
+        ], 'Login successful', 200);
     }
 }
