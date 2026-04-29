@@ -1,0 +1,274 @@
+{
+  "info": {
+    "_postman_id": "deaacff5-a980-4003-a1bb-6eb5979c6b14",
+    "name": "php-laravel-backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36273736",
+    "_collection_link": "https://go.postman.co/collection/36273736-deaacff5-a980-4003-a1bb-6eb5979c6b14?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "register",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"public\"\n}\n\n// {\n//     \"name\": \"Adum Smite\",\n//     \"email\": \"adumsmite@example.com\",\n//     \"password\": \"password123\",\n//     \"role\": \"staff\"\n// }\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/register",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\n//     \"email\": \"public@test.com\",\n//     \"password\": \"user1234\"\n// }\n\n// {\n//     \"email\": \"staff@test.com\",\n//     \"password\": \"staff1234\"\n// }\n\n{\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"user1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/login",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cooperatives",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "2|Y5UY0bPIcD6tH66lBCWhahvTOgSZlQOcVwhtGAl919dfee13",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"สหกรณ์โรงอาหาร\",\n    \"member_count\": 10\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/cooperatives",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "cooperatives"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "My Request",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "5|o7dSuQQ26MLiDAEi2KLhycwG0TGGbHYJ3RzNXE5had521f8b",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/cooperatives/me",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "cooperatives",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Review",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "3|Ciu2Nrwb03xp4eEdyhzKdrg6TkaGLv8iWSLtC5bOe6cfd7fe",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/staff/cooperatives",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "staff",
+            "cooperatives"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Review approval",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "3|Ciu2Nrwb03xp4eEdyhzKdrg6TkaGLv8iWSLtC5bOe6cfd7fe",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"status\":\"rejected\",\n    \"remark\":\"ไม่ผ่าน\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://php-laravel-backend-production.up.railway.app/api/staff/cooperatives/1/review",
+          "protocol": "https",
+          "host": [
+            "php-laravel-backend-production",
+            "up",
+            "railway",
+            "app"
+          ],
+          "path": [
+            "api",
+            "staff",
+            "cooperatives",
+            "1",
+            "review"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
