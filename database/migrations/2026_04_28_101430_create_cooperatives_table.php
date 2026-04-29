@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('cooperatives', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
             $table->string('name')->unique();
             $table->integer('member_count');
             $table->string('status')->default('pending');
-            $table->foreignId('user_id')->constrained();
-            $table->text('remarks')->nullable();
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }
