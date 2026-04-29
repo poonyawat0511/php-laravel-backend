@@ -1,58 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ระบบยื่นคำขอจัดตั้งสหกรณ์ (Cooperative Request Management API)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+โปรเจกต์ระบบ Backend สำหรับจัดการคำขอจัดตั้งสหกรณ์ พัฒนาด้วย **Laravel 11** และใช้ **PostgreSQL** เป็นฐานข้อมูลหลักระบบมีการแบ่งสิทธิ์การใช้งานชัดเจนระหว่างผู้ใช้งานทั่วไป (Public) และเจ้าหน้าที่ (Staff)
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1. ข้อมูลการทดสอบผ่านระบบ Cloud (Railway)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+คุณสามารถทดสอบ API ได้ทันทีผ่าน URL สาธารณะโดยไม่ต้องติดตั้งโปรเจกต์ในเครื่อง
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Base URL:** `https://php-laravel-backend-production.up.railway.app`
+- **Setup Database:** `https://php-laravel-backend-production.up.railway.app/api/setup-db`  
+  *(ใช้สำหรับรีเซ็ตและ Seed ข้อมูลเริ่มต้นเข้าฐานข้อมูลใหม่ทั้งหมด)*
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 2. ข้อมูลบัญชีสำหรับทดสอบ (Seed Users)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ข้อมูลชุดนี้ถูกติดตั้งไว้ในระบบเรียบร้อยแล้วผ่าน Database Seeder:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| บทบาท (Role) | อีเมล (Email) | รหัสผ่าน (Password) | สิทธิ์การใช้งาน |
+| :--- | :--- | :--- | :--- |
+| **Public User** | `public@test.com` | `user1234` | ยื่นคำขอจัดตั้ง, ดูรายการคำขอของตนเอง |
+| **Staff User** | `staff@test.com` | `staff1234` | ดูคำขอทั้งหมดในระบบ, อนุมัติ/ปฏิเสธคำขอ |
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 3. การติดตั้งและรันโปรเจกต์ในเครื่อง (Localhost)
 
-```bash
-composer require laravel/boost --dev
+### ความต้องการของระบบ
+- PHP 8.3 หรือสูงกว่า
+- Composer
+- ฐานข้อมูล PostgreSQL
 
-php artisan boost:install
-```
+### ขั้นตอนการรัน
+1. **ติดตั้ง Dependencies:**
+   ```bash
+   composer install
+2. **ตั้งค่าไฟล์ Environment:**
+คัดลอกไฟล์ .env.example เป็น .env และตั้งค่าฐานข้อมูลให้ถูกต้อง
+    ```bash
+   cp .env.example .env
+3. **สร้าง Application Key:**
+    ```bash
+    php artisan key:generate
+4. **เตรียมฐานข้อมูล (Migrate & Seed):**
+    ```bash
+    php artisan migrate:fresh --seed
+5. **เริ่มรันเซิร์ฟเวอร์:**
+    ```bash
+    php artisan serve
+- ระบบจะรันอยู่ที่: http://127.0.0.1:8000
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 4. การทดสอบด้วย Postman
+**ภายในโปรเจกต์ได้แนบไฟล์ Postman Collection ไว้เพื่อความสะดวกในการทดสอบ API:**
+ไฟล์ที่เกี่ยวข้อง: php-laravel-backend.postman_collection (อยู่ในโฟลเดอร์หลัก)
+### วิธีการใช้:
+1. **Import ไฟล์เข้าโปรแกรม Postman**
+2. **เริ่มต้นด้วยการเรียก Request register สำหรับลงทะเบียนผู้ใช้ใหม่**
+3. **หลังจากลงทะเบียนผู้ใช้สามารถใช Email และ Password ในการ login ด้วยการเรียก Request login**
+4. **คัดลอก Token ไปใส่ใน Header Authorization: Bearer {token} สำหรับ Request ที่ต้องใช้สิทธิ์ในการเข้าถึง**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# รายการ API Routes ที่สำคัญ
+## Public Endpoints
+- POST /api/register : ลงทะเบียนผู้ใช้ใหม่
+- POST /api/login : เข้าสู่ระบบเพื่อรับ Token
+- POST /api/cooperatives : ยื่นคำขอจัดตั้งสหกรณ์ (ต้องมี Token)
+- GET /api/cooperatives/me : ดูประวัติคำขอของตนเอง (ต้องมี Token)
 
-## Code of Conduct
+## Staff Endpoints (ต้องมี Staff Middleware)
+- GET /api/staff/cooperatives : รายการคำขอทั้งหมด (รองรับ Query String ?status=pending)
+- PATCH /api/staff/cooperatives/{id}/review : พิจารณาคำขอ (approved/rejected)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# โครงสร้างโปรเจกต์ที่สำคัญ
+- app/Http/Controllers : การประมวลผล Logic ของระบบ
+- app/Models : โครงสร้างตารางและสัมพันธ์ของข้อมูล
+- database/migrations : โครงสร้าง Database Schema
+- database/seeders : ข้อมูลตั้งต้นสำหรับทดสอบ (Public & Staff Users)
+- routes/api.php : การกำหนดเส้นทาง API ทั้งหมด
